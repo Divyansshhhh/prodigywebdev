@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Interactive Navigation</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            scroll-behavior: smooth;
+            background-color: #f4f4f9;
+        }
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #333;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 30px;
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.3);
+            z-index: 1000;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .navbar.scrolled {
+            background-color: #222;
+            transform: translateY(-10px);
+        }
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #f4a261;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            transition: color 0.3s;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+            transition: color 0.3s, transform 0.3s;
+        }
+        .navbar a:hover, .navbar a.active {
+            color: #f4a261;
+            transform: scale(1.1);
+        }
+        section {
+            padding: 100px 20px;
+            margin-top: 70px;
+            min-height: 500px;
+            background-color: white;
+            margin-bottom: 20px;
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        section:hover {
+            transform: translateY(-5px);
+        }
+        section h2 {
+            color: #333;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+        section p {
+            color: #555;
+            font-size: 16px;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        footer {
+            text-align: center;
+            padding: 15px;
+            background-color: #333;
+            color: white;
+            margin-top: 20px;
+            box-shadow: 0px -4px 8px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar" id="navbar">
+        <div class="logo">My basic Website</div>
+        <div>
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </div>
+
+    <section id="home">
+        <h2>Home Section</h2>
+        <p>Welcome to our homepage!</p>
+    </section>
+    <section id="about">
+        <h2>About Section</h2>
+        <p>Discover more about who we are and what drives us forward.</p>
+    </section>
+    <section id="services">
+        <h2>Services Section</h2>
+        <p>Explore the exceptional services we provide to our clients.</p>
+    </section>
+    <section id="contact">
+        <h2>Contact Section</h2>
+        <p>Reach out to us with your questions or feedback. We would love to hear from you!</p>
+    </section>
+
+    <footer>
+        &copy; 2025 My basic Website | All Rights Reserved
+    </footer>
+
+    <script>
+        window.addEventListener("scroll", function() {
+            const navbar = document.getElementById("navbar");
+            const links = navbar.querySelectorAll("a");
+            if (window.scrollY > 50) {
+                navbar.classList.add("scrolled");
+            } else {
+                navbar.classList.remove("scrolled");
+            }
+
+            document.querySelectorAll("section").forEach(section => {
+                const rect = section.getBoundingClientRect();
+                const link = navbar.querySelector(`a[href="#${section.id}"]`);
+                if (rect.top <= 100 && rect.bottom >= 100) {
+                    links.forEach(l => l.classList.remove("active"));
+                    link.classList.add("active");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
